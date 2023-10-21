@@ -1,0 +1,5 @@
+package com.product.ifeignclient;
+
+public class IProductFeignClient {
+
+}

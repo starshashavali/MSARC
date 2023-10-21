@@ -1,0 +1,14 @@
+package com.product.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.product.service.IProductService;
+
+@RestController
+public class ProductRestController {
+	
+	@Autowired
+	private IProductService iproductService;
+
+}

@@ -1,0 +1,25 @@
+package com.user.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.websocket.server.PathParam;
+
+@RestController
+public class UserRestController {
+@Autowired
+private IProductFeignClient iproductFeignClient;
+	
+@GetMapping("/user/id")
+	public ResponseEntity<?> getUserProduct(@PathParam Integer id){
+		
+	return new ResponseEntity<?>(HttpStatus.OK);
+	}
+
+@GetMapping("/userProducts")
+public ResponseEntity<?> getUserProduct(){
+	return new ResponseEntity<?>(HttpStatus.OK);
+}

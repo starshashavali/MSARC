@@ -1,0 +1,78 @@
+package com.product.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.product.domain.Product;
+import com.product.dto.ProductDTO;
+import com.product.exception.IdNotFoundException;
+import com.product.repo.ProductRepo;
+import com.product.service.IProductService;
+@Service
+public class IProductServiceImpl implements IProductService{
+	
+	@Autowired
+	ProductRepo productRepo;
+	
+	@Override
+	public String saveProduct(ProductDTO dto) {
+		
+		Product entity=new Product();
+		BeanUtils.copyProperties(dto, entity);
+		productRepo.save(entity);
+		
+		return "success";
+	}
+	private static Map<Integer, Product> hardcodedProducts = new HashMap<>();
+
+    static {
+        // Adding hardcoded products
+        hardcodedProducts.put(1, new Product(1, "Product 1", /* other attributes */));
+        hardcodedProducts.put(2, new Product(2, "Product 2", /* other attributes */));
+        hardcodedProducts.put(3, new Product(3, "Product 3", /* other attributes */));
+        hardcodedProducts.put(4, new Product(4, "Product 4", /* other attributes */));
+        hardcodedProducts.put(5, new Product(5, "Product 5", /* other attributes */));
+        hardcodedProducts.put(6, new Product(6, "Product 6", /* other attributes */));
+        hardcodedProducts.put(7, new Product(7, "Product 7", /* other attributes */));
+        hardcodedProducts.put(8, new Product(8, "Product 8", /* other attributes */));
+        hardcodedProducts.put(9, new Product(9, "Product 9", /* other attributes */));
+        hardcodedProducts.put(10, new Product(10, "Product 10", /* other attributes */));
+    }
+
+	@Override
+	public ProductDTO getProductById(Integer id) {
+	    if (id.equals(1)) { // Hardcoded example, you can adjust this condition according to your needs
+	        Product product = new Product();
+	        product.setId(1); // Hardcoded value
+	        product.setName("Hardcoded Product"); // Hardcoded value
+	        // Set other attributes here
+	        
+	        ProductDTO dto = new ProductDTO();
+	        BeanUtils.copyProperties(product, dto);
+	        return dto;
+	    }
+
+	    throw new IdNotFoundException("Id not found " + id);
+	}
+
+	@Override
+	public List<ProductDTO> getAllProducts() {
+		List<Product> entities = productRepo.findAll();
+		List<ProductDTO> dtos=new ArrayList<>();
+		for(Product entity:entities) {
+			ProductDTO dto=new ProductDTO();
+		BeanUtils.copyProperties(entity, dto);
+		dtos.add(dto);
+		}
+		
+		return dtos;
+	}
+	
+	
+
+}

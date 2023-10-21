@@ -1,0 +1,22 @@
+package com.product.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.product.dto.ProductDTO;
+import com.product.service.IProductService;
+
+@RestController
+public class ProductRestController {
+	
+	@Autowired
+	private IProductService iproductService;
+	
+	public ResponseEntity<?> getById(@PathVariable Integer id){
+		ProductDTO dto = iproductService.getProductById(id);
+		return new ResponseEntity<?> (dto,org.springframework.http.HttpStatus.OK);
+	}
+
+}

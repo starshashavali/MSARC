@@ -1,0 +1,8 @@
+package com.product.ifeignclient;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name="/PRODUCT_RESTAPI")
+public class IProductFeignClient {
+
+}

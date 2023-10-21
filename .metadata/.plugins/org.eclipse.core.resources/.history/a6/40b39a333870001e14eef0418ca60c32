@@ -1,0 +1,41 @@
+package com.product.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.product.domain.Product;
+import com.product.dto.ProductDTO;
+import com.product.repo.ProductRepo;
+import com.product.service.IProductService;
+@Service
+public class IProductServiceImpl implements IProductService{
+	
+	@Autowired
+	ProductRepo productRepo;
+	
+	@Override
+	public String saveProduct(ProductDTO dto) {
+		
+		Product entity=new Product();
+		
+		
+		return null;
+	}
+
+	@Override
+	public ProductDTO getProductById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductDTO> getAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

@@ -1,0 +1,52 @@
+package com.product.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.product.domain.Product;
+import com.product.dto.ProductDTO;
+import com.product.exception.IdNotFoundException;
+import com.product.repo.ProductRepo;
+import com.product.service.IProductService;
+@Service
+public class IProductServiceImpl implements IProductService{
+	
+	@Autowired
+	ProductRepo productRepo;
+	
+	@Override
+	public String saveProduct(ProductDTO dto) {
+		
+		Product entity=new Product();
+		BeanUtils.copyProperties(dto, entity);
+		productRepo.save(entity);
+		
+		return "success";
+	}
+
+	@Override
+	public ProductDTO getProductById(Integer id) {
+		Optional<Product> productEntity = productRepo.findById(id);
+		if(productEntity.isPresent()) {
+			Product product = productEntity.get();
+			ProductDTO dto=new ProductDTO();
+			BeanUtils.copyProperties(product, dto);
+			return dto;
+		}
+		
+		throw new IdNotFoundException("Id not found " + id)
+	}
+
+	@Override
+	public List<ProductDTO> getAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}
